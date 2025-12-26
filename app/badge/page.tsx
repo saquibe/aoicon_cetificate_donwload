@@ -161,8 +161,8 @@ export default function BadgePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 py-6 px-4">
-      <div className="max-w-sm mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 flex items-center justify-center px-4">
+      <div className="max-w-sm w-full">
         {/* <div className="text-center mb-6">
           <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 mb-2 shadow-lg">
             <Award className="w-6 h-6 text-white" />
@@ -239,7 +239,7 @@ export default function BadgePage() {
             </div>
 
             {/* Badge Footer */}
-            <div className="bg-gray-50 px-4 py-3 border-t border-gray-300">
+            {/* <div className="bg-gray-50 px-4 py-3 border-t border-gray-300">
               <div className="flex justify-between text-xs text-gray-600">
                 <div className="text-center">
                   <p className="font-semibold">YEAR</p>
@@ -254,12 +254,12 @@ export default function BadgePage() {
                   <p>KOLKATA</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </Card>
         </div>
 
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 ignore-in-image mt-5">
+        <div className="grid grid-cols-2 gap-3 ignore-in-image mt-10">
           <Button
             onClick={handleDownload}
             disabled={loading}

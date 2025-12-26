@@ -89,9 +89,9 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100 p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 mb-4 shadow-lg">
+          {/* <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 mb-4 shadow-lg">
             <Shield className="w-10 h-10 text-white" />
-          </div>
+          </div> */}
           <h1 className="text-4xl font-bold text-gray-900 mb-2">AOICON 2026</h1>
           <p className="text-xl text-gray-600">KOLKATA</p>
         </div>

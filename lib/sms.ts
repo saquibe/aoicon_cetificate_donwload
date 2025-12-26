@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export async function sendSMS(mobile: string, otp: string) {
   try {
@@ -7,27 +7,59 @@ export async function sendSMS(mobile: string, otp: string) {
     const password = process.env.SMS_GATEWAY_PASSWORD;
 
     if (!apiKey || !userId || !password) {
-      throw new Error('SMS Gateway credentials not configured');
+      throw new Error("SMS Gateway credentials not configured");
     }
 
-    const message = `Your OTP for AOICON 2026 KOLKATA registration is: ${otp}. Valid for 10 minutes. Do not share this OTP with anyone.`;
+    // Format the mobile number correctly for India
+    const formattedMobile = mobile.replace(/^0|^\+91|^91/, ""); // Remove prefixes
+    if (!/^\d{10}$/.test(formattedMobile)) {
+      throw new Error(
+        `Invalid mobile number format: ${mobile}. Expected 10 digits.`
+      );
+    }
 
-    const response = await axios.get('https://www.smsgatewayhub.com/api/mt/SendSMS', {
-      params: {
-        APIKey: apiKey,
-        senderid: 'AOICON',
-        channel: '2',
-        DCS: '0',
-        flashsms: '0',
-        number: mobile,
-        text: message,
-        route: '1'
+    // Use the exact message template required by your SMS provider
+    const message = `Login OTP for AOICON 2026 Registration is ${otp}. Do not share this OTP to anyone for security reasons. - SaaScraft Studio`;
+
+    // Change from axios.get to axios.post
+    const response = await axios.post(
+      "https://www.smsgatewayhub.com/api/mt/SendSMS", // URL
+      null, // POST data (null if sending via params)
+      {
+        params: {
+          // Keep your parameters here
+          APIKey: apiKey,
+          senderid: "SAASOE", // Verify this Sender ID is registered and active
+          channel: "2",
+          DCS: "0",
+          flashsms: "0",
+          number: `91${formattedMobile}`, // Re-add country code
+          text: message,
+          route: "1",
+          // The SMS Gateway Hub API often requires 'User' and 'passwd' parameters for POST
+          User: userId,
+          passwd: password,
+        },
+        headers: {
+          Accept: "application/json", // Specify expected response format
+        },
       }
-    });
+    );
 
-    return response.data;
-  } catch (error) {
-    console.error('SMS sending error:', error);
-    throw new Error('Failed to send SMS');
+    console.log("SMS API Response:", response.data); // Log response for debugging
+
+    // Check the response. Success codes vary by provider (sometimes '000' or '200').
+    if (response.data.ErrorCode === "000") {
+      return response.data;
+    } else {
+      throw new Error(`SMS Gateway Error: ${response.data.ErrorMessage}`);
+    }
+  } catch (error: any) {
+    console.error("SMS sending error details:", {
+      message: error.message,
+      response: error.response?.data,
+      mobile: mobile,
+    });
+    throw new Error("Failed to send SMS");
   }
 }
