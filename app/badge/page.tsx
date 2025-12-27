@@ -24,10 +24,7 @@ export default function BadgePage() {
   useEffect(() => {
     if (session?.user) {
       const user = session.user as any;
-      const qrData = JSON.stringify({
-        registrationNumber: user.registrationNumber,
-      });
-
+      const qrData = user.registrationNumber;
       generateQRCode(qrData);
     }
   }, [session]);
