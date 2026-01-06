@@ -1,12 +1,12 @@
-import NextAuth from 'next-auth';
+import NextAuth from "next-auth";
 
-declare module 'next-auth' {
+declare module "next-auth" {
   interface User {
     id: string;
     name: string;
     email: string;
     registrationNumber: string;
-    mobile: number;
+    mobile: string;
     certUrl: string;
   }
 
@@ -16,17 +16,17 @@ declare module 'next-auth' {
       name: string;
       email: string;
       registrationNumber: string;
-      mobile: number;
+      mobile: string;
       certUrl: string;
     };
   }
 }
 
-declare module 'next-auth/jwt' {
+declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     registrationNumber: string;
-    mobile: number;
+    mobile: string;
     certUrl: string;
   }
 }

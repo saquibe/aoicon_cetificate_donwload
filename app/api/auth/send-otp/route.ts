@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
     } else {
       // For mobile search - convert to number
       // Mobile numbers are stored as numbers (7331131070) not strings
-      const mobileNumber = parseInt(identifier, 10);
+      // const mobileNumber = parseInt(identifier, 10);
       user = await usersCollection.findOne({
-        Mobile: mobileNumber,
+        Mobile: identifier,
       });
     }
 

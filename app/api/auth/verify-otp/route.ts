@@ -28,9 +28,9 @@ export async function POST(req: NextRequest) {
         otpExpiry: { $gt: new Date() },
       });
     } else {
-      const mobileNumber = parseInt(identifier, 10);
+      // const mobileNumber = parseInt(identifier, 10);
       user = await usersCollection.findOne({
-        Mobile: mobileNumber,
+        Mobile: identifier,
         otp: otp,
         otpExpiry: { $gt: new Date() },
       });
