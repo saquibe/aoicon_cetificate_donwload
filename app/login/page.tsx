@@ -70,7 +70,7 @@ export default function LoginPage() {
       if (result?.error) {
         setError("Invalid OTP. Please try again.");
       } else if (result?.ok) {
-        router.push("/badge");
+        router.push("/certificate");
       }
     } catch (err: any) {
       setError(err.message || "Something went wrong");
